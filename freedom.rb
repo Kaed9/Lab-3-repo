@@ -1,14 +1,16 @@
 require 'sinatra'
 require 'yaml/store'
 
-# class FreedomBoard < Sinatra::Base
-	get '/' do
-		erb :index
-	end
+get '/' do
+	erb :index
+end
 
-	post '/cast' do
-		store = YAML::Store.new "messages.store"
-		
-		erb :cast
+post '/cast' do
+	@store = YAML::Store.new "messages.store"
+	@message = params['message_area']
+	@name = params['name_area']
+	@store.transaction do
+		@store["Posts"] ||= {@name => @message}
 	end
-# end
+	erb :cast
+end
