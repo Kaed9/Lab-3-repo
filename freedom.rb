@@ -16,3 +16,13 @@ post '/cast' do
 	end
 	erb :index
 end
+
+post '/search' do
+	@search_item = params['search_bar']
+	@counter = 0
+	erb :search
+end
+
+post '/return' do
+	erb :index
+end

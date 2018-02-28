@@ -74,31 +74,29 @@
 		<h2>Share your thoughts here!</h2>
 	</div>
 	
-	<div class="content_area">
-		<form action="cast" method="post">
-			<textarea rows="4" cols="50" placeholder="Type your message here..." autocomplete="off" value='' name="message_area"></textarea>
-			<p></p>
-			<input type="text" id="name_holder" autocomplete="off" value="Anonymous" name="name_area">
-			<input type="submit" id="submit_button" value="POST IT">
-		</form>
-	</div>
-	
 	<div class="posts_area">
 		<div class="search_area">
-			<form action="search" method="post">
-				<input type="search" name="search_bar" placeholder="Name" autocomplete="off">
-				<input type="submit" id="search_button" value="SEARCH">
+			<form action="return" method="post">
+				<input type="search" name="search_bar" placeholder="Name" value=<%= @search_item %>>
+				<input type="submit" id="search_button" value="RETURN">
 			</form>
 		</div>
 		<p></p>
 		<div class="posts_content_area">
 			<p id="divider"></p>
 			<% YAML.load_file("messages.yml").sort_by {|k, v|}.reverse.each do |x, y| %>
-			<% y.each do |key, value| %>
-			<p class="posts"id="name_style"><%= "#{key}" %></p>
-			<p class="posts"><%= "#{value}" %></p>
+				<% y.each do |key, value| %>
+					<% if key == @search_item %>
+						<p class="posts"id="name_style"><%= "#{key}" %></p>
+						<p class="posts"><%= "#{value}" %></p>
+						<p id="divider"></p>
+						<% @counter += 1 %>
+					<% end %>
+				<% end %>
 			<% end %>
-			<p id="divider"></p>
+			<% if @counter == 0%>
+				<p class="posts">Name not found!</p>
+				<p id="divider"></p>
 			<% end %>
 		</div>
 	</div>
