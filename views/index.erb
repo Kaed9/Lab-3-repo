@@ -8,6 +8,7 @@
 			text-align: center;
 			font-family: Arial, Times New Roman;
 			background-color: rgb(255, 218, 185);
+			margin-top: 20px;
 		}
 		
 		#submit_button {
@@ -34,6 +35,27 @@
 		#name_holder {
 			font-size: 16px;
 		}
+		
+		.posts_area {
+			border: 2px solid black;
+			margin: 50px 200px;
+			background-color: white;
+			padding: 20px 40px;
+		}
+		
+		#divider {
+			border: 1px solid gray;
+			margin: 10px 0px;
+		}
+		
+		.posts {
+			text-align: left;
+		}
+		
+		#name_style {
+			font-weight: bold;
+			color: rgb(30, 144, 255);
+		}
 	</style>
 </head>
 	
@@ -47,9 +69,20 @@
 		<form action="cast" method="post">
 			<textarea rows="4" cols="50" placeholder="Type your message here..." autocomplete="off" value='' name="message_area"></textarea>
 			<p></p>
-			<input type="text" id="name_holder" placeholder="Anonymous" autocomplete="off" value='' name="name_area">
+			<input type="text" id="name_holder" autocomplete="off" value="Anonymous" name="name_area">
 			<input type="submit" id="submit_button" value="POST IT">
 		</form>
+	</div>
+	
+	<div class="posts_area">
+		<div class="posts_content_area">
+			<p id="divider"></p>
+			<% YAML.load_file("messages.yml").each do |x, y| %>
+			<p class="posts"id="name_style"><%= "#{x}" %></p>
+			<p class="posts"><%= "#{y}" %></p>
+			<p id="divider"></p>
+			<% end %>
+		</div>
 	</div>
 </body>
 </html>

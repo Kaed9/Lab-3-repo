@@ -8,11 +8,14 @@ end
 post '/cast' do
 	@store = YAML::Store.new "messages.yml"
 	@name = params['name_area']
-	@message = params['message_area']
+	@message = ""
+	if params['message_area'] == " "
+		@message << "Anonymous"
+	else
+		@message << params['message_area']
+	end
 	@store.transaction do
 		@store[@name] ||= @message
 	end
-	
-	# @contents = YAML.load_file("messages.yml")
-	erb :cast
+	erb :index
 end
