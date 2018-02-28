@@ -6,11 +6,13 @@ get '/' do
 end
 
 post '/cast' do
-	@store = YAML::Store.new "messages.store"
-	@message = params['message_area']
+	@store = YAML::Store.new "messages.yml"
 	@name = params['name_area']
+	@message = params['message_area']
 	@store.transaction do
-		@store["Posts"] ||= {@name => @message}
+		@store[@name] ||= @message
 	end
+	
+	# @contents = YAML.load_file("messages.yml")
 	erb :cast
 end

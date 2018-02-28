@@ -44,11 +44,9 @@
 	</div>
 	
 	<div class="content_area">
-		<p>
-			<%=
-				
-			%>
-		</p>
+		<% YAML.load_file("messages.yml").each do |x, y| %>
+		<p><%= "Name: #{x} ... Message: #{y}" %> </p>
+		<% end %>
 	</div>
 </body>
 </html>
