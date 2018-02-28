@@ -77,9 +77,11 @@
 	<div class="posts_area">
 		<div class="posts_content_area">
 			<p id="divider"></p>
-			<% YAML.load_file("messages.yml").each do |x, y| %>
-			<p class="posts"id="name_style"><%= "#{x}" %></p>
-			<p class="posts"><%= "#{y}" %></p>
+			<% YAML.load_file("messages.yml").sort_by {|k, v|}.reverse.each do |x, y| %>
+			<% y.each do |key, value| %>
+			<p class="posts"id="name_style"><%= "#{key}" %></p>
+			<p class="posts"><%= "#{value}" %></p>
+			<% end %>
 			<p id="divider"></p>
 			<% end %>
 		</div>
