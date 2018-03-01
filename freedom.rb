@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'yaml/store'
 
-class FreedomBoard < Sinatra::Base
+
 	get '/' do
 		erb :index
 	end
@@ -27,4 +27,3 @@ class FreedomBoard < Sinatra::Base
 	post '/return' do
 		erb :index
 	end
-end
